@@ -101,7 +101,7 @@ body{
   font-size: 14px;
 }
 .wrapper {
-  width: 1020px;
+  max-width: 1020px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(9, 1fr);
