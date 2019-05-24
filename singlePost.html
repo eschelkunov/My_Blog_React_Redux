@@ -12,13 +12,14 @@
     <div class="container">
       <div class="menu">
         <a href="index.html"><i class="fas fa-long-arrow-alt-left"></i> Back to Posts</a>
-        <a id="btn" href="#"><i class="fas fa-trash-alt"></i> Remove Post</a>
+        <a id="btn-edt" href="#edit"><i class="fas fa-edit"></i> Edit Post</a>
+        <a id="btn-rm" href="#remove"><i class="fas fa-trash-alt"></i> Remove Post</a>
       </div>
       <header>
         <h1>Single post page</h1>
       </header>
       <section class="main">
-        <div class="post">
+        <div class="post" id="edit-post">
             <h1>Game of Thrones season 8 episode 6: Jon Snow star ACCIDENTALLY reveals devastating fate?</h1>
             <p>GAME OF THRONES season eight has been incredibly tough for fans of the hit HBO fantasy drama so far, as there have been some almighty twists in the storyline. But in the latest trailer for the the show’s documentary has Jon Snow star Kit Harington accidentally revealed his character’s fate?</p>
             <p>Game of Thrones season eight episode five was possibly the most heartbreaking and horrifying instalment of the HBO show ever to grace screens.Daenerys Targaryen (played by Emilia Clarke) completely lost the plot and turned in the Mad Queen after her perceived portrayals from Jon Snow (Kit Harington), Tyrion Lannister (Peter Dinklage) and Varys (Conleth Hill).The mother of dragons was still reeling and grieving for the death of her beloved dragon Rhaegal and her handmaiden Missandei(Nathalie Emmanuel) in episode four.Yet the betrayals of her closest remaining allies became too much to bear, and the need for revenge overtook everything else.</p>
@@ -29,11 +30,15 @@
               <i class="far fa-heart"></i>
               <span>5</span>
             </div>
+            <div class="options" id="post-options">
+              <a href="#" class="button" id="save-post">Save</a>
+              <a href="#" class="button"id="cancel-post">Cancel</a>
+            </div>
           </div>
           <!-- Modal section -->
           <div class="bg-modal">
             <div class="modal-content">
-              <span>Are you sure?</span>
+              <span class="modal-message"></span>
               <div class="options">
                 <a href="#" class="button" id="agree">yes</a>
                 <a href="#" class="button"id="disagree">no</a>
@@ -42,6 +47,6 @@
           </div>
       </section>
     </div>
-    <script type="text/javascript" src="js/popup.js"></script>
+    <script type="text/javascript" src="js/scripts.js"></script>
   </body>
 </html>
