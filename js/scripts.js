@@ -33,6 +33,9 @@ findElement('#disagree').addEventListener("click", function() {
 // Edit button
 
 getElementById('btn-edt').addEventListener("click", function() {
+	getElementById("btn-back-to-posts").style.display = "none";
+	getElementById("btn-edt").style.display = "none";
+	getElementById("btn-rm").style.display = "none";
 	getElementById("edit-post").setAttribute("contenteditable", "true");
 	getElementById("edit-post").focus();
 	findElement('.post-info').style.display = "none";
@@ -40,8 +43,7 @@ getElementById('btn-edt').addEventListener("click", function() {
 });
 
 getElementById('edit-post').addEventListener("blur", function() {
-	showPopupWithMessage('Do you want to save the changes?', 'flex');
-	findElement('.post-info').style.display = "inherit";
+	getElementById("edit-post").focus();
 });
 
 getElementById('save-post').addEventListener("click", function(){

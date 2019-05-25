@@ -54,7 +54,7 @@ header h1{
 .main{
   grid-area: main;
   font-size: 14px;
-  height: 900px;
+  height:auto;
 }
 
 /* Single post page */
@@ -134,6 +134,7 @@ header h1{
 	padding: 8px;
 	outline: none;
 	border: 1px solid #B0CFE0;
+  max-width: 450px;
 
 }.form-style-9 ul li  .field-style:focus{
 	box-shadow: 0 0 5px #B0CFE0;
