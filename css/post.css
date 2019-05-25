@@ -157,7 +157,6 @@ header h1{
 }
 .form-style-9 ul li input[type="button"],
 .form-style-9 ul li input[type="submit"] {
-	box-shadow: inset 0px 1px 0px 0px #34343d;
 	background-color: #60606e;
 	border: 1px solid #17445E;
 	display: inline-block;
