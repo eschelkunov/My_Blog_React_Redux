@@ -1,0 +1,24 @@
+{
+  "name": "yshchelkunov",
+  "version": "1.0.0",
+  "description": "frontend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.lohika.com/ssp-2019/yshchelkunov.git"
+  },
+  "keywords": [
+    "ssp",
+    "blog",
+    "frontend",
+    "lohika"
+  ],
+  "author": "Evgeniy Schelkunov",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.0"
+  }
+}
