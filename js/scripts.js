@@ -10,7 +10,7 @@ let getElementById = id => {
 
 let closePopupAndRedirectToSinglePagePost = () => {
 	findElement('.bg-modal').style.display = "none";
-	document.location = 'singlePost.html';
+	document.location = '/post';
 }
 
 let showPopupWithMessage = (message, displayState) => {
@@ -47,9 +47,9 @@ getElementById('edit-post').addEventListener("blur", function() {
 });
 
 getElementById('save-post').addEventListener("click", function(){
-	document.location = 'singlePost.html';
+	document.location = '/post';
 });
 
 getElementById('cancel-post').addEventListener("click", function(){
-	document.location = 'singlePost.html';
+	document.location = '/post';
 });
