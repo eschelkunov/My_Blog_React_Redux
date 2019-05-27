@@ -8,9 +8,9 @@ let getElementById = id => {
 	return document.getElementById(id);
 }
 
-let closePopupAndRedirectToSinglePagePost = () => {
+let closePopupAndRedirectTo = page => {
 	findElement('.bg-modal').style.display = "none";
-	document.location = '/post';
+	document.location = page;
 }
 
 let showPopupWithMessage = (message, displayState) => {
@@ -23,11 +23,11 @@ getElementById('btn-rm').addEventListener("click", function() {
 });
 
 findElement('#agree').addEventListener("click", function() {
-	closePopupAndRedirectToSinglePagePost();
+	closePopupAndRedirectTo('/home');
 });
 
 findElement('#disagree').addEventListener("click", function() {
-	closePopupAndRedirectToSinglePagePost();
+	closePopupAndRedirectTo('/post');
 });
 
 // Edit button
