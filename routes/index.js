@@ -7,7 +7,7 @@ router.get('/home', function(req, res, next) {
 });
 
 /* GET newPost page. */
-router.get('/new', function(req, res, next) {
+router.get('/home/new', function(req, res, next) {
   res.render('newPost', { title: 'New post' });
 });
 
@@ -17,17 +17,22 @@ router.put('/new#create', function(req, res, next) {
 });
 
 /* GET singlePost page. */
-router.get('/post/id', function(req, res, next) {
+router.get('/post/:postId', function(req, res, next) {
   res.render('singlePost', { title: 'Single post page' });
 });
 
 /* Edit post and save. */
-router.post('/post/id#save', function(req, res, next) {
+router.post('/post/:postId#edit', function(req, res, next) {
+  res.render('singlePost', { title: 'Post changes was saved' });
+});
+
+/* Edit post and save. */
+router.post('/post/:postId#save', function(req, res, next) {
   res.render('singlePost', { title: 'Post changes was saved' });
 });
 
 /* Delete post and confirm */
-router.delete('/post/id#remove', function(req, res, next) {
+router.delete('/post/:postId#remove', function(req, res, next) {
   res.render('index', { title: 'Post was removed. Redirecting to home page' });
 });
 
