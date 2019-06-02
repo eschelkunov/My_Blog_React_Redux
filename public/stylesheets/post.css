@@ -3,7 +3,7 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800); /* Open sans font */
 
 body{
-  background: #FFFFFF url("../img/site-hero.jpg") no-repeat;
+  background: #FFFFFF url("../images/site-hero.jpg") no-repeat;
   width: 100%;
   background-size: cover;
   background-attachment: fixed;

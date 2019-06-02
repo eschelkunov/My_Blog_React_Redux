@@ -1,12 +1,13 @@
+'use strict';
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
+var bodyParser = require('body-parser');
+var db = require('./config/dbconnection');
+var cors = require('cors');
 var app = express();
 
 // view engine setup
@@ -17,16 +18,10 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
-app.use('/css', express.static(path.join(__dirname, 'css')));
-app.use('/js', express.static(path.join(__dirname, 'js')));
-app.use('/img', express.static(path.join(__dirname, 'img')));
-app.use('/home', express.static(path.join(__dirname, 'index.html')));
-app.use('/home/new', express.static(path.join(__dirname, 'newPost.html')));
-app.use('/post/', express.static(path.join(__dirname, 'singlePost.html')));
+app.use(express.static(path.join(__dirname, '/public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use(cors());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

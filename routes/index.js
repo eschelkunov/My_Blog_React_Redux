@@ -1,39 +1,61 @@
+'use strict';
 var express = require('express');
 var router = express.Router();
+var path = require('path');
+var Post = require('../models/post');
 
-/* GET home page. */
-router.get('/home', function(req, res, next) {
-  res.render('index', { title: 'Home page of my blog' });
+// PAGES
+
+/* GET all posts page. */
+router.get(['/', '/posts'], function(req, res, next) {
+  res.sendFile(path.join(__dirname,'../public/main.html'));
 });
 
-/* GET newPost page. */
-router.get('/home/new', function(req, res, next) {
-  res.render('newPost', { title: 'New post' });
+/* GET new post page. */
+router.get('/posts/new', function(req, res, next) {
+  res.sendFile(path.join(__dirname,'../public/newPost.html'));
 });
 
-/* Create new post */
-router.put('/new#create', function(req, res, next) {
-  res.render('singlePost', { title: 'Your new post is saved' });
+/* GET single post page. */
+router.get('/posts/:postId', function(req, res, next) {
+  res.sendFile(path.join(__dirname,'../public/singlePost.html'));
 });
 
-/* GET singlePost page. */
-router.get('/post/:postId', function(req, res, next) {
-  res.render('singlePost', { title: 'Single post page' });
+// DB
+
+/* Get all posts */
+router.get('/api/posts/getAll', function(req, res, next){
+  Post.getAllPosts(function(err, rows){
+    (err)? res.json(err): res.json(rows);
+  });
 });
 
-/* Edit post and save. */
-router.post('/post/:postId#edit', function(req, res, next) {
-  res.render('singlePost', { title: 'Post changes was saved' });
+/* GET post by ID */
+router.get('/api/posts/:id', function(req, res, next){
+  Post.getPostById(req.params.id, function(err, rows){
+    (err)? res.json(err) : res.json(rows);
+  });
 });
 
-/* Edit post and save. */
-router.post('/post/:postId#save', function(req, res, next) {
-  res.render('singlePost', { title: 'Post changes was saved' });
+/* Add post */
+router.post('/api/posts/addNew', function(req, res, next){
+  Post.addPost(req.body, function(err, count){
+    (err)? res.json(err) : res.json(req.body);
+  });
 });
 
-/* Delete post and confirm */
-router.delete('/post/:postId#remove', function(req, res, next) {
-  res.render('index', { title: 'Post was removed. Redirecting to home page' });
+/* Update post */
+router.put('/api/posts/:id', function(req, res, next){
+  Post.updatePost(req.params.id, req.body, function(err,rows){
+    (err)? res.json(err) : res.json(rows);
+  });
+});
+
+/* Delete post */
+router.delete('/api/posts/:id', function(req, res, next){
+  Post.deletePost(req.params.id, function(err, count){
+    (err)? res.json(err) : res.json(count);
+  });
 });
 
 module.exports = router;

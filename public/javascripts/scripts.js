@@ -1,4 +1,4 @@
-
+'use strict';
 // Popup
 let findElement = by => {
 	return document.querySelector(by);
@@ -10,7 +10,7 @@ let getElementById = id => {
 
 let closePopupAndRedirectTo = page => {
 	findElement('.bg-modal').style.display = "none";
-	document.location = page;
+	document.location.href = page;
 }
 
 let showPopupWithMessage = (message, displayState) => {
@@ -23,11 +23,11 @@ getElementById('btn-rm').addEventListener("click", function() {
 });
 
 findElement('#agree').addEventListener("click", function() {
-	closePopupAndRedirectTo('/home');
+	closePopupAndRedirectTo('/posts');
 });
 
 findElement('#disagree').addEventListener("click", function() {
-	closePopupAndRedirectTo('/post');
+	closePopupAndRedirectTo('/posts/postId');
 });
 
 // Edit button
@@ -47,9 +47,9 @@ getElementById('edit-post').addEventListener("blur", function() {
 });
 
 getElementById('save-post').addEventListener("click", function(){
-	document.location = '/post';
+	document.location.href = '/posts/postId';
 });
 
 getElementById('cancel-post').addEventListener("click", function(){
-	document.location = '/post';
+	document.location.href = '/posts/postId';
 });
