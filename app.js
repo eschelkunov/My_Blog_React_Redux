@@ -20,8 +20,26 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
 
-app.use('/', indexRouter);
+app.use('/api', indexRouter);
 app.use(cors());
+
+// HTML Pages routes
+
+/* GET all posts page. */
+app.get(['/', '/posts'], function(req, res, next) {
+  res.sendFile(path.join(__dirname,'./public/main.html'));
+});
+
+/* GET new post page. */
+app.get('/posts/new', function(req, res, next) {
+  res.sendFile(path.join(__dirname,'./public/newPost.html'));
+});
+
+/* GET single post page. */
+app.get('/posts/:postId', function(req, res, next) {
+  res.sendFile(path.join(__dirname,'./public/singlePost.html'));
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
