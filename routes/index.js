@@ -2,7 +2,7 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
-var Post = require('../models/post');
+var Post = require('../models/Post');
 
 // PAGES
 
@@ -24,7 +24,7 @@ router.get('/posts/:postId', function(req, res, next) {
 // DB
 
 /* Get all posts */
-router.get('/api/posts/getAll', function(req, res, next){
+router.get('/api/posts/', function(req, res, next){
   Post.getAllPosts(function(err, rows){
     (err)? res.json(err): res.json(rows);
   });
@@ -38,7 +38,7 @@ router.get('/api/posts/:id', function(req, res, next){
 });
 
 /* Add post */
-router.post('/api/posts/addNew', function(req, res, next){
+router.post('/api/posts/', function(req, res, next){
   Post.addPost(req.body, function(err, count){
     (err)? res.json(err) : res.json(req.body);
   });
