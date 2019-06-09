@@ -1,11 +1,11 @@
-'use strict';
 
-const Sequelize = require("sequelize");
 
-const sequelize = new Sequelize('blog_posts', 'root', 'password', { 
-  host: '127.0.0.1', 
-  dialect: 'mysql'
- });
+const Sequelize = require('sequelize');
 
- module.exports = sequelize;
- global.sequelize = sequelize;
+const sequelize = new Sequelize('blog_posts', 'root', 'password', {
+  host: '127.0.0.1',
+  dialect: 'mysql',
+});
+
+module.exports = sequelize;
+global.sequelize = sequelize;
