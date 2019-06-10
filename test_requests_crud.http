@@ -1,0 +1,34 @@
+// Works only in VScode using Rest Client
+
+// Test: Get all posts
+GET http://localhost:3000/api/posts/
+
+#########
+
+// Test: Add post
+POST http://localhost:3000/api/posts/ 
+Content-Type: application/json
+
+{
+    "title":"HELLO !!!!!!!",
+    "content":"hello !!!!!",
+    "user_id":1
+}
+
+##########
+
+// Test: Edit post
+PUT http://localhost:3000/api/posts/55
+Content-Type: application/json
+
+{
+    "title": " Updated title 2",
+    "content": "updated content"
+}
+
+#######
+
+// Test: Delete post
+DELETE http://localhost:3000/api/posts/31
+Content-Type: application/json
+

@@ -1,55 +1,51 @@
-'use strict';
+
 // Popup
-let findElement = by => {
-	return document.querySelector(by);
-}
+const findElement = by => document.querySelector(by);
 
-let getElementById = id => {
-	return document.getElementById(id);
-}
+const getElementById = id => document.getElementById(id);
 
-let closePopupAndRedirectTo = page => {
-	findElement('.bg-modal').style.display = "none";
-	document.location.href = page;
-}
+const closePopupAndRedirectTo = (page) => {
+  findElement('.bg-modal').style.display = 'none';
+  document.location.href = page;
+};
 
-let showPopupWithMessage = (message, displayState) => {
-	findElement('.modal-message').textContent=message;
-	findElement('.bg-modal').style.display = displayState;
-}
+const showPopupWithMessage = (message, displayState) => {
+  findElement('.modal-message').textContent = message;
+  findElement('.bg-modal').style.display = displayState;
+};
 
-getElementById('btn-rm').addEventListener("click", function() {
-	showPopupWithMessage('Are you sure?', 'flex');
+getElementById('btn-rm').addEventListener('click', () => {
+  showPopupWithMessage('Are you sure?', 'flex');
 });
 
-findElement('#agree').addEventListener("click", function() {
-	closePopupAndRedirectTo('/posts');
+findElement('#agree').addEventListener('click', () => {
+  closePopupAndRedirectTo('/posts');
 });
 
-findElement('#disagree').addEventListener("click", function() {
-	closePopupAndRedirectTo('/posts/postId');
+findElement('#disagree').addEventListener('click', () => {
+  closePopupAndRedirectTo('/posts/postId');
 });
 
 // Edit button
 
-getElementById('btn-edt').addEventListener("click", function() {
-	getElementById("btn-back-to-posts").style.display = "none";
-	getElementById("btn-edt").style.display = "none";
-	getElementById("btn-rm").style.display = "none";
-	getElementById("edit-post").setAttribute("contenteditable", "true");
-	getElementById("edit-post").focus();
-	findElement('.post-info').style.display = "none";
-	getElementById('post-options').style.display = "block";
+getElementById('btn-edt').addEventListener('click', () => {
+  getElementById('btn-back-to-posts').style.display = 'none';
+  getElementById('btn-edt').style.display = 'none';
+  getElementById('btn-rm').style.display = 'none';
+  getElementById('edit-post').setAttribute('contenteditable', 'true');
+  getElementById('edit-post').focus();
+  findElement('.post-info').style.display = 'none';
+  getElementById('post-options').style.display = 'block';
 });
 
-getElementById('edit-post').addEventListener("blur", function() {
-	getElementById("edit-post").focus();
+getElementById('edit-post').addEventListener('blur', () => {
+  getElementById('edit-post').focus();
 });
 
-getElementById('save-post').addEventListener("click", function(){
-	document.location.href = '/posts/postId';
+getElementById('save-post').addEventListener('click', () => {
+  document.location.href = '/posts/postId';
 });
 
-getElementById('cancel-post').addEventListener("click", function(){
-	document.location.href = '/posts/postId';
+getElementById('cancel-post').addEventListener('click', () => {
+  document.location.href = '/posts/postId';
 });

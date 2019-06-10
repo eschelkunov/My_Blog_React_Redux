@@ -1,42 +1,70 @@
-'use strict';
 
-var Post = require('../models/Post.js');
+const Post = require('../models/Post');
+const User = require('../models/User');
 
-    exports.fetch_all_posts = function(req, res) {
-        Post.getAllPosts(function(err, post) {
-            console.log('controller')
-            if (err) res.send(err);
-            console.log('res', post);
-            res.send(post);
-        });
-    };
+User.hasMany(Post, { as: 'Posts', foreignKey: 'user_id' });
+Post.belongsTo(User, { as: 'User', foreignKey: 'user_id' });
 
-    exports.create_a_post = function(req, res) {
-        var new_post = new Post(req.body);
-        //handles null error 
-        if(!new_post.post || !new_post.status){
-            res.status(400).send({ error:true, message: 'Please provide post/status' });
-        }else{
-            Post.addPost(new_post, function(err, post) {
-                (err)? res.send(err) : res.json(post);
-            });
-        }
-    };
+const errorHandler = (err) => {
+  console.error('Error: ', err);
+};
 
-    exports.read_a_post = function(req, res) {
-        Post.getPostById(req.params.id, function(err, post) {
-            (err)? res.send(err) : res.json(post);
-        });
-    };
+// Posts
 
-    exports.update_a_post = function(req, res) {
-        Post.updatePost(req.params.id, new Post(req.body), function(err, post) {
-            (err)? res.send(err) : res.json(post);
-        });
-    };
+exports.fetch_all_posts = async (req, res) => {
+  const posts = await Post.findAll().catch(errorHandler);
+  return res.send(posts);
+};
 
-    exports.delete_a_post = function(req, res) {
-        Post.deletePost(req.params.id, function(err, post) {
-            (err)? res.send(err) : res.json({ message: 'Post successfully deleted' });
-        });
-    };
+exports.create_a_post = async (req, res) => {
+  const post = await Post.create({
+    post_title: req.body.title,
+    post_content: req.body.content,
+    user_id: req.body.user_id,
+  }).catch(errorHandler);
+  return res.json(post);
+};
+
+exports.read_a_post = async (req, res) => {
+  const post = await Post.findOne({
+    where: { id: req.params.id },
+  }).catch(errorHandler);
+  return res.json(post);
+};
+
+exports.update_a_post = async (req, res) => {
+  const post = await Post.update(
+    {
+      post_title: req.body.title,
+      post_content: req.body.content,
+    },
+    { where: { id: req.params.id } },
+  )
+    .catch(errorHandler);
+  return res.json(post);
+};
+
+exports.delete_a_post = async (req, res) => {
+  const post = await Post.destroy({
+    where: { id: req.params.id },
+  }).catch(errorHandler);
+  return res.json({ message: 'Post successfully deleted' });
+};
+
+// Users
+
+exports.fetch_all_users = async (req, res) => {
+  const users = await User.findAll().catch(errorHandler);
+  return res.send(users);
+};
+
+exports.create_a_user = async (req, res) => {
+  const user = await User.create({
+    username: req.params.username, // to be implemented
+    passwd: req.params.password, // to be implemented
+    user_email: req.params.mail, // to be implemented
+    likes: 0,
+    comments: 0,
+  }).catch(errorHandler);
+  return res.json(user);
+};

@@ -1,16 +1,11 @@
-'use strict';
 
-var mysql = require('mysql');
-var config = require('./database');
 
-var connection = mysql.createConnection(config);
+const Sequelize = require('sequelize');
 
-connection.connect((err) => {
-  if (err) {
-    throw err;
-  }
-  console.log('MySql Connected');
+const sequelize = new Sequelize('blog_posts', 'root', 'password', {
+  host: '127.0.0.1',
+  dialect: 'mysql',
 });
 
-
-module.exports=connection;
+module.exports = sequelize;
+global.sequelize = sequelize;
