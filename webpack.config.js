@@ -9,7 +9,7 @@ const conf = {
   optimization: {
     minimizer: [
       new UglifyJsPlugin({
-        // to make uglify working build project with -mode 'production'
+        // to make uglify working -> build project with -mode 'production'
         // include: /\.js?$/,
         test: /\.js(\?.*)?$/i,
         uglifyOptions: {
@@ -90,16 +90,16 @@ const conf = {
   },
 
   // Plugins
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './public/index.html',
-      filename: 'index.html',
-      hash: true,
-    }),
-    new ScriptExtHtmlWebpackPlugin({
-      defaultAttribute: 'defer',
-    }),
-  ],
+  // plugins: [
+  //   new HtmlWebpackPlugin({
+  //     template: './public/index.html',
+  //     filename: 'index.html',
+  //     hash: true,
+  //   }),
+  //   new ScriptExtHtmlWebpackPlugin({
+  //     defaultAttribute: 'defer',
+  //   }),
+  // ],
 };
 
 module.exports = (env, options) => {

@@ -32,7 +32,7 @@ app.use('/api', indexRouter);
 
 /* GET all posts page. */
 app.get(['/', '/posts'], (req, res) => {
-  res.sendFile(path.join(__dirname, './public/main.html'));
+  res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
 /* GET new post page. */

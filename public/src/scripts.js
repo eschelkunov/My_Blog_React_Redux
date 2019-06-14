@@ -1,6 +1,19 @@
-const findElement = by => document.querySelector(by);
+const findElement = selector => document.querySelector(selector);
 
 const getElementById = id => document.getElementById(id);
+
+const onClick = (element, callback) => {
+  // handler to prevent type error: Cannot read property 'addEventListener' of null
+  if (element) {
+    element.addEventListener('click', callback);
+  }
+};
+
+const onBlur = (element, callback) => {
+  if (element) {
+    element.addEventListener('blur', callback);
+  }
+};
 
 const closePopupAndRedirectTo = (page) => {
   findElement('.bg-modal').style.display = 'none';
@@ -12,21 +25,21 @@ const showPopupWithMessage = (message, displayState) => {
   findElement('.bg-modal').style.display = displayState;
 };
 
-getElementById('btn-rm').addEventListener('click', () => {
+onClick(getElementById('btn-rm'), () => {
   showPopupWithMessage('Are you sure?', 'flex');
 });
 
-findElement('#agree').addEventListener('click', () => {
+onClick(findElement('#agree'), () => {
   closePopupAndRedirectTo('/posts');
 });
 
-findElement('#disagree').addEventListener('click', () => {
+onClick(findElement('#disagree'), () => {
   closePopupAndRedirectTo('/posts/postId');
 });
 
 // Edit button
 
-getElementById('btn-edt').addEventListener('click', () => {
+onClick(getElementById('btn-edt'), () => {
   getElementById('btn-back-to-posts').style.display = 'none';
   getElementById('btn-edt').style.display = 'none';
   getElementById('btn-rm').style.display = 'none';
@@ -36,14 +49,14 @@ getElementById('btn-edt').addEventListener('click', () => {
   getElementById('post-options').style.display = 'block';
 });
 
-getElementById('edit-post').addEventListener('blur', () => {
+onBlur(getElementById('edit-post'), () => {
   getElementById('edit-post').focus();
 });
 
-getElementById('save-post').addEventListener('click', () => {
+onClick(getElementById('save-post'), () => {
   document.location.href = '/posts/postId';
 });
 
-getElementById('cancel-post').addEventListener('click', () => {
+onClick(getElementById('cancel-post'), () => {
   document.location.href = '/posts/postId';
 });

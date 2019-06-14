@@ -21,8 +21,6 @@ function updateTheme(e) {
 }
 
 const theme = window.localStorage.getItem('theme');
-if (theme === 'dark') {
-  root.style.setProperty('--bgImg', `url(/${img2})`);
-} else {
-  root.style.setProperty('--bgImg', `url(/${img1})`);
-}
+theme === 'dark'
+  ? root.style.setProperty('--bgImg', `url(/${img2})`)
+  : root.style.setProperty('--bgImg', `url(/${img1})`);
