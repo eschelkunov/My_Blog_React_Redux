@@ -1,0 +1,5 @@
+/bin/
+/migrations/*.js
+/public/main.js
+/views/
+.gitignore
