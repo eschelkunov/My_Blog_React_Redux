@@ -1,4 +1,3 @@
-
 const Post = require('../models/Post');
 const User = require('../models/User');
 
@@ -17,12 +16,16 @@ exports.fetch_all_posts = async (req, res) => {
 };
 
 exports.create_a_post = async (req, res) => {
-  const post = await Post.create({
-    post_title: req.body.title,
-    post_content: req.body.content,
-    user_id: req.body.user_id,
-  }).catch(errorHandler);
-  return res.json(post);
+  if (!req.body.title || !req.body.content || !req.body.user_id) {
+    res.status(400).send({ error: true, message: 'Please provide title/content' });
+  } else {
+    const post = await Post.create({
+      post_title: req.body.title,
+      post_content: req.body.content,
+      user_id: req.body.user_id,
+    }).catch(errorHandler);
+    return res.json(post);
+  }
 };
 
 exports.read_a_post = async (req, res) => {
@@ -38,9 +41,8 @@ exports.update_a_post = async (req, res) => {
       post_title: req.body.title,
       post_content: req.body.content,
     },
-    { where: { id: req.params.id } },
-  )
-    .catch(errorHandler);
+    { where: { id: req.body.id } },
+  ).catch(errorHandler);
   return res.json(post);
 };
 

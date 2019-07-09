@@ -10,20 +10,21 @@ POST http://localhost:3000/api/posts/
 Content-Type: application/json
 
 {
-    "title":"HELLO !!!!!!!",
-    "content":"hello !!!!!",
+    "title":"ssss",
+    "content":"sssss !!!!!",
     "user_id":1
 }
 
 ##########
 
 // Test: Edit post
-PUT http://localhost:3000/api/posts/55
+PUT http://localhost:3000/api/posts/60
 Content-Type: application/json
 
 {
     "title": " Updated title 2",
-    "content": "updated content"
+    "content": "updated content",
+    "id": 60
 }
 
 #######

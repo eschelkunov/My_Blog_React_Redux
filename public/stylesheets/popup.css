@@ -23,7 +23,7 @@
 }
 .options{
   display: block;
-  padding: 45px;
+  padding: 25px;
 }
 .options a{
   display: inline-block;
@@ -36,7 +36,7 @@
   padding: 2px;
   font-size: 15px;
 }
-a:hover{
+.options a:hover{
   background: linear-gradient(to bottom, #34343d 5%, #34343d 100%);
   background-color: #28739E;
 }

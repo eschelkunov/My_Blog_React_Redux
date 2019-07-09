@@ -1,36 +1,26 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8" />
-    <title>New post</title>
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-      integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
-      crossorigin="anonymous"
-    />
-  </head>
-  <body>
-    <div class="container">
+import { onNavItemClick } from '../router';
+
+export const newPostTemplate = ` 
+<div class="container">
       <div class="menu">
-        <a id="posts" href="/posts"
-          ><i class="fas fa-long-arrow-alt-left"></i> Back to Posts</a
-        >
+        <a href="/posts" id="btn-back-to-posts"><i class="fas fa-long-arrow-alt-left"></i> Back to Posts</a>
       </div>
       <header>
         <h1>Please fill in the fields below to add the post:</h1>
       </header>
       <section class="main">
-        <form class="form-style-9">
+        <div class="form-style">
           <ul>
             <li>
               <input
+                id="name"
                 type="text"
                 name="field1"
                 class="field-style field-split align-left"
                 placeholder="Name"
               />
               <input
+                id="email"
                 type="email"
                 name="field2"
                 class="field-style field-split align-right"
@@ -39,6 +29,7 @@
             </li>
             <li>
               <input
+                id="title"
                 type="text"
                 name="field3"
                 class="field-style field-full align-none"
@@ -47,19 +38,18 @@
             </li>
             <li>
               <textarea
+                id="content"
                 name="field5"
                 class="field-style"
                 placeholder="Post something here.."
               ></textarea>
             </li>
             <li>
-              <input type="submit" value="Post" />
+              <div id="submit">Post</div>
             </li>
           </ul>
-        </form>
+        </div>
       </section>
       <footer>Copyright Evgeniy Schelkunov</footer>
     </div>
-    <script type="text/javascript" src="/main.js"></script>
-  </body>
-</html>
+`;
