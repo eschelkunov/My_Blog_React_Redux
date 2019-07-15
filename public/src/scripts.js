@@ -42,21 +42,17 @@ export function getElementById(id) {
 
 const showEditMode = (bool) => {
   if (bool) {
-    getElementById('btn-back-to-posts').style.display = 'none';
-    getElementById('btn-edt').style.display = 'none';
-    getElementById('btn-rm').style.display = 'none';
     getElementById('edit-post').setAttribute('contenteditable', 'true');
     getElementById('edit-post').focus();
-    findElement('.post-info').style.display = 'none';
-    getElementById('post-options').style.display = 'block';
+    findElement('.menu').classList.add('edit-mode');
+    findElement('.post-info').classList.add('edit-mode');
+    getElementById('post-options').classList.add('show-block');
   } else {
-    getElementById('btn-back-to-posts').style.display = 'inline-block';
-    getElementById('btn-edt').style.display = 'inline-block';
-    getElementById('btn-rm').style.display = 'inline-block';
     getElementById('edit-post').setAttribute('contenteditable', 'false');
     getElementById('edit-post').blur();
-    findElement('.post-info').style.display = 'block';
-    getElementById('post-options').style.display = 'none';
+    findElement('.menu').classList.remove('edit-mode');
+    findElement('.post-info').classList.remove('edit-mode');
+    getElementById('post-options').classList.remove('show-block');
   }
 };
 
@@ -83,89 +79,142 @@ const showPopupWithMessage = (message, displayState) => {
   findElement('.bg-modal').style.display = displayState;
 };
 
-export function initListeners(page) {
-  // change theme listeners:
-  document.querySelectorAll('.toolbar > button').forEach((btn) => {
+function handleThemeButtons() {
+  return document.querySelectorAll('.toolbar > button').forEach((btn) => {
     btn.addEventListener('click', updateTheme);
   });
-  // common listeners:
-  onClick(getElementById('btn-back-to-posts'), (event) => {
+}
+
+function handleButtonBackToPosts() {
+  return onClick(getElementById('btn-back-to-posts'), (event) => {
     onNavItemClick('/posts');
   });
+}
+
+function handlePostsNavButton() {
+  return onClick(getElementById('posts'), (event) => {
+    event.preventDefault();
+    getAllPosts().then(() => onNavItemClick('/posts'));
+  });
+}
+
+function handleNewNavButton() {
+  return onClick(getElementById('new'), (event) => {
+    event.preventDefault();
+    onNavItemClick('/new');
+  });
+}
+
+function handleLatestPostLinks() {
+  return document.querySelectorAll('h2>a').forEach((selector) => {
+    const linkID = selector.getAttribute('id');
+    document.querySelector(`#${linkID}`).addEventListener('click', (event) => {
+      event.preventDefault();
+      onNavItemClick(`/posts/${linkID.slice(1)}`);
+    });
+  });
+}
+
+function handleContinueLinks() {
+  return document.querySelectorAll('.short-post>a').forEach((selector) => {
+    const linkID = selector.getAttribute('id');
+    document.querySelector(`#${linkID}`).addEventListener('click', (event) => {
+      event.preventDefault();
+      onNavItemClick(`/posts/${linkID.slice(1)}`);
+    });
+  });
+}
+
+function handleRemovePostButton() {
+  return onClick(getElementById('btn-rm'), (event) => {
+    event.preventDefault();
+    showPopupWithMessage('Are you sure?', 'flex');
+  });
+}
+
+function handleConfirmRemoving() {
+  return onClick(findElement('#agree'), (event) => {
+    event.preventDefault();
+    const urlPath = document.location.pathname;
+    const id = urlPath.slice(urlPath.lastIndexOf('/') + 1);
+    deletePost(id)
+      .then(() => closePopup('.bg-modal'))
+      .then(() => (location.href = '/posts'));
+  });
+}
+
+function handleRejectingRemoving() {
+  return onClick(findElement('#disagree'), (event) => {
+    event.preventDefault();
+    closePopup('.bg-modal');
+  });
+}
+
+function handleEditPostButton() {
+  return onClick(getElementById('btn-edt'), (event) => {
+    event.preventDefault();
+    showEditMode(true);
+  });
+}
+
+function handleClickOutsideFrame() {
+  return onBlur(getElementById('edit-post'), () => {
+    getElementById('edit-post').focus();
+  });
+}
+
+function handleSavePostButton() {
+  return onClick(getElementById('save-post'), (event) => {
+    event.preventDefault();
+    const title = findElement('.post h1').innerText;
+    const content = findElement('.post p').innerText;
+    const urlPath = document.location.pathname;
+    const id = urlPath.slice(urlPath.lastIndexOf('/') + 1);
+    editPost({ title, content, id }).then(() => showEditMode(false));
+  });
+}
+
+function handleCancelPostButton() {
+  return onClick(getElementById('cancel-post'), (event) => {
+    event.preventDefault();
+    showEditMode(false);
+  });
+}
+
+function handleSubmitNewPostButton() {
+  return onClick(getElementById('submit'), () => {
+    const name = getElementById('name').value;
+    const email = getElementById('email').value;
+    const title = getElementById('title').value;
+    const content = getElementById('content').value;
+    const user_id = 1;
+    addPost({ title, content, user_id }).then((data) => {
+      onNavItemClick(`/posts/${data.id}`);
+    });
+  });
+}
+
+export function initListeners(page) {
+  handleThemeButtons();
+  handleButtonBackToPosts();
   switch (page) {
     case 'home':
-      onClick(getElementById('posts'), (event) => {
-        event.preventDefault();
-        getAllPosts().then(() => onNavItemClick('/posts'));
-      });
-      onClick(getElementById('new'), (event) => {
-        event.preventDefault();
-        onNavItemClick('/new');
-      });
-      document.querySelectorAll('h2>a').forEach((selector) => {
-        const linkID = selector.getAttribute('id');
-        document.querySelector(`#${linkID}`).addEventListener('click', (event) => {
-          event.preventDefault();
-          onNavItemClick(`/posts/${linkID.slice(1)}`);
-        });
-      });
-      document.querySelectorAll('.short-post>a').forEach((selector) => {
-        const linkID = selector.getAttribute('id');
-        document.querySelector(`#${linkID}`).addEventListener('click', (event) => {
-          event.preventDefault();
-          onNavItemClick(`/posts/${linkID.slice(1)}`);
-        });
-      });
+      handlePostsNavButton();
+      handleNewNavButton();
+      handleLatestPostLinks();
+      handleContinueLinks();
       break;
     case 'single':
-      onClick(getElementById('btn-rm'), (event) => {
-        event.preventDefault();
-        showPopupWithMessage('Are you sure?', 'flex');
-      });
-      onClick(findElement('#agree'), (event) => {
-        event.preventDefault();
-        deletePost()
-          .then(() => closePopup('.bg-modal'))
-          .then(() => (location.href = '/posts'));
-      });
-      onClick(findElement('#disagree'), (event) => {
-        event.preventDefault();
-        closePopup('.bg-modal');
-      });
-      onClick(getElementById('btn-edt'), (event) => {
-        event.preventDefault();
-        showEditMode(true);
-      });
-      // when click outside
-      onBlur(getElementById('edit-post'), () => {
-        getElementById('edit-post').focus();
-      });
-      onClick(getElementById('save-post'), (event) => {
-        event.preventDefault();
-        const title = findElement('.post h1').innerText;
-        const content = findElement('.post p').innerText;
-        const urlPath = document.location.pathname;
-        const id = urlPath.slice(urlPath.lastIndexOf('/') + 1);
-        editPost({ title, content, id }).then(() => showEditMode(false));
-      });
-      onClick(getElementById('cancel-post'), (event) => {
-        event.preventDefault();
-        showEditMode(false);
-      });
+      handleRemovePostButton();
+      handleConfirmRemoving();
+      handleRejectingRemoving();
+      handleEditPostButton();
+      handleClickOutsideFrame();
+      handleSavePostButton();
+      handleCancelPostButton();
       break;
     case 'new':
-      onClick(getElementById('submit'), () => {
-        const name = getElementById('name').value;
-        const email = getElementById('email').value;
-        const title = getElementById('title').value;
-        const content = getElementById('content').value;
-        const user_id = 1;
-        debugger;
-        addPost({ title, content, user_id }).then((data) => {
-          debugger;
-          onNavItemClick(`/posts/${data.id}`);
-        });
-      });
+      handleSubmitNewPostButton();
       break;
   }
 }

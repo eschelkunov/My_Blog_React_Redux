@@ -1,72 +1,31 @@
-import { findElement, getElementById } from './src/scripts';
+const BASE_URL = '/api/posts/';
 
-// XML HTTP Requests
+const handleResponse = function (response) {
+  return response.json().then((json) => {
+    if (response.ok) {
+      return json;
+    }
+    return Promise.reject(response);
+  });
+};
+
+const doRequest = (url, params, method, body) => fetch(`${url}${params}`, {
+  method,
+  headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+  body,
+}).then(handleResponse);
 
 // Fetch all posts
-export const getAllPosts = () => new Promise((resolve) => {
-  const xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      resolve(JSON.parse(xhttp.responseText));
-    }
-  };
-  xhttp.open('get', '/api/posts/', true);
-  xhttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-  xhttp.send();
-});
+export const getAllPosts = () => doRequest(BASE_URL, '');
 
-// Open post
-export const openPost = id => new Promise((resolve) => {
-  const xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      resolve(JSON.parse(xhttp.responseText));
-    }
-  };
-  xhttp.open('get', `/api/posts/${id}`, true);
-  xhttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-  xhttp.send();
-});
+// Open single post
+export const openPost = id => doRequest(BASE_URL, `${id}`);
 
 // Add a post
-export const addPost = data => new Promise((resolve) => {
-  const xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      resolve(JSON.parse(xhttp.responseText));
-    }
-  };
-  xhttp.open('post', '/api/posts/', true);
-  xhttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-  xhttp.send(JSON.stringify(data));
-});
+export const addPost = data => doRequest(BASE_URL, '', 'POST', JSON.stringify(data));
 
 // Edit post
-export const editPost = data => new Promise((resolve) => {
-  const xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      findElement('.post h1').innerText = data.title;
-      findElement('.post p').innerText = data.content;
-      resolve();
-    }
-  };
-  xhttp.open('put', `/api/posts/${data.id}`, true);
-  xhttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-  xhttp.send(JSON.stringify(data));
-});
+export const editPost = data => doRequest(BASE_URL, `${data.id}`, 'PUT', JSON.stringify(data));
 
 // Delete post
-export const deletePost = () => new Promise((resolve) => {
-  const urlPath = document.location.pathname;
-  const id = urlPath.slice(urlPath.lastIndexOf('/') + 1);
-  const xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      resolve();
-    }
-  };
-  xhttp.open('delete', `/api/posts/${id}`, true);
-  xhttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-  xhttp.send();
-});
+export const deletePost = id => doRequest(BASE_URL, `${id}`, 'DELETE');

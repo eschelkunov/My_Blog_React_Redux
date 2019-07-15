@@ -87,6 +87,12 @@ header h1{
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
 }
+.edit-mode{
+  display: none;
+}
+.show-block{
+  display: block !important;
+}
 /* Form style */
 .form-style{
   max-width: 450px;
