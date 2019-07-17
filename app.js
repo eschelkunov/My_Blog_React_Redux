@@ -9,9 +9,6 @@ const indexRouter = require('./routes/index');
 
 const app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
 app.use(cors());
 
 // support parsing of application/json type post data
@@ -31,18 +28,9 @@ app.use('/api', indexRouter);
 // HTML Pages routes
 
 /* GET all posts page. */
-app.get(['/', '/posts'], (req, res) => {
+app.get(['/*'], (req, res) => {
+  // return only one one page in the end
   res.sendFile(path.join(__dirname, './public/index.html'));
-});
-
-/* GET new post page. */
-app.get('/posts/new', (req, res) => {
-  res.sendFile(path.join(__dirname, './public/newPost.html'));
-});
-
-/* GET single post page. */
-app.get('/posts/:postId', (req, res) => {
-  res.sendFile(path.join(__dirname, './public/singlePost.html'));
 });
 
 // catch 404 and forward to error handler
