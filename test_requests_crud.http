@@ -10,21 +10,22 @@ POST http://localhost:3000/api/posts/
 Content-Type: application/json
 
 {
-    "title":"ssss",
-    "content":"sssss !!!!!",
-    "user_id":1
+    "title":"First post",
+    "content":"React/Redux",
+    "email":"test@email.com",
+    "username": "Jack Sparrow"
 }
 
 ##########
 
 // Test: Edit post
-PUT http://localhost:3000/api/posts/60
+PUT http://localhost:3000/api/posts/58
 Content-Type: application/json
 
 {
-    "title": " Updated title 2",
-    "content": "updated content",
-    "id": 60
+    "title": " Updated title 331111",
+    "content": "updated content111111",
+    "id": 58
 }
 
 #######

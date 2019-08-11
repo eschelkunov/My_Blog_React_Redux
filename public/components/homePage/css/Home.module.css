@@ -1,0 +1,52 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+
+body{
+  background: #FFFFFF no-repeat;
+  /* background-image: var(--bgImg); */
+  background-image: url("../../../images/site-hero.jpg");
+  width: 100%;
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.wrapper {
+  max-width: 1020px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-auto-rows: minmax(100px, auto);
+  grid-template-areas:
+    "hd hd hd hd   hd   hd   hd   hd   hd"
+    "sd sd sd main main main main main main"
+    "sd  sd  sd  ft   ft   ft   ft   ft   ft";
+}
+* {
+  box-sizing: border-box;
+}
+.wrapper {
+  display: grid;
+  grid-auto-rows: minmax(100px, auto);
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "hd"
+    "sd"
+    "main"
+    "ft";
+}
+.wrapper > div {
+  border-radius: 1em;
+  color: #000;
+  margin: 10px;
+}
+@media (min-width: 700px) {
+  .wrapper {
+    margin-top: 2px;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-areas:
+      "hd hd hd hd   hd   hd   hd   hd   hd"
+      "sd sd sd main main main main main main"
+      "sd sd sd  ft  ft   ft   ft   ft   ft";
+  }
+}

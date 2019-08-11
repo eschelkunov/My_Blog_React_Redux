@@ -34,11 +34,11 @@ const conf = {
     filename: 'main.js',
   },
   target: 'node', // in order to ignore built-in modules like path, fs, etc.
-  externals: [nodeExternals()], // in order to ignore all modules in node_modules folder
+  // externals: [nodeExternals()], // in order to ignore all modules in node_modules folder
   module: {
     rules: [
       {
-        test: /\.js?$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
@@ -56,7 +56,14 @@ const conf = {
         exclude: /node_modules/,
         use: [
           'style-loader',
-          { loader: 'css-loader', options: { importLoaders: 1 } },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              modules: true,
+              localIdentName: '[name]__[local]___[hash:base64:5]',
+            },
+          },
           { loader: 'postcss-loader', options: { config: { path: './postcss.config.js' } } },
         ],
       },
