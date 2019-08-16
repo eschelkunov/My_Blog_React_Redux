@@ -3,8 +3,6 @@
 
 body{
   background: #FFFFFF no-repeat;
-  /* background-image: var(--bgImg); */
-  background-image: url("../../../images/site-hero.jpg");
   width: 100%;
   background-size: cover;
   background-attachment: fixed;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Footer from '../Footer.jsx';
 import HeaderHome from './HeaderHome.jsx';
 import SideBar from './SideBar.jsx';

@@ -11,11 +11,13 @@ import { combineReducers } from 'redux';
 
 import menuReducer from '../reducers/menuReducer';
 import { postsReducer } from '../reducers/postsReducer';
+import themeReducer from '../reducers/themeReducer';
 
 const store = createStore(
   combineReducers({
     Posts: postsReducer,
     Menu: menuReducer,
+    Theme: themeReducer
   }),
   applyMiddleware(thunk),
 );

@@ -9,6 +9,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getPostsError, getPosts, getPostsLoading } from '../reducers/postsReducer';
 import { fetchPosts } from '../actions/postsActions';
+import mountains from '../images/mountains.jpg';
+import hero from '../images/site-hero.jpg';
 
 export class App extends Component {
   componentWillMount() {
@@ -17,7 +19,12 @@ export class App extends Component {
   }
 
   render() {
-    const { loading } = this.props;
+    const { loading, theme } = this.props;
+
+    // Changes body's style requires using pure JS
+    document.getElementById('body').style.backgroundImage =
+      theme === 'light' ? `url(${hero})` : `url(${mountains})`;
+
     if (loading) return <LoadingSpinner />;
     return (
       <BrowserRouter>
@@ -35,6 +42,7 @@ const mapStateToProps = state => ({
   error: getPostsError(state.Posts),
   posts: getPosts(state.Posts),
   loading: getPostsLoading(state.Posts),
+  theme: state.Theme.theme,
 });
 
 const mapDispatchToProps = dispatch =>
