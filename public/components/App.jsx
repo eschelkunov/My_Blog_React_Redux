@@ -18,12 +18,13 @@ export class App extends Component {
     fetchPosts();
   }
 
-  render() {
-    const { loading, theme } = this.props;
-
-    // Changes body's style requires using pure JS
+  componentDidUpdate(){
     document.getElementById('body').style.backgroundImage =
-      theme === 'light' ? `url(${hero})` : `url(${mountains})`;
+      this.props.theme === 'light' ? `url(${hero})` : `url(${mountains})`;
+  }
+
+  render() {
+    const { loading } = this.props;
 
     if (loading) return <LoadingSpinner />;
     return (

@@ -6,10 +6,10 @@ export default function PostOptions(props) {
   const { onSave, onCancel } = props;
   return (
     <div className={styles.optionsShown}>
-      <NavLink to="#save" className={styles.button} onClick={onSave}>
+      <NavLink to="/" className={styles.button} onClick={onSave}>
         Save
       </NavLink>
-      <NavLink to="#cancel" className={styles.button} onClick={onCancel}>
+      <NavLink to="/" className={styles.button} onClick={onCancel}>
         Cancel
       </NavLink>
     </div>
