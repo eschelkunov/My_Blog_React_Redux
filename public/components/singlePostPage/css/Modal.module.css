@@ -1,16 +1,31 @@
-.bg-modal{
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+
+.bgModalHide{
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
   position: fixed;
   top: 0;
   left: 0;
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
   display: none;
 }
-.modal-content{
+.bgModalShow{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.modalContent{
   width: 300px;
   height: 100px;
   background-color: rgba(255, 255, 255, 0.6);
@@ -40,9 +55,9 @@
   background: linear-gradient(to bottom, #34343d 5%, #34343d 100%);
   background-color: #28739E;
 }
-a#agree{
+.confirmRemoving{
   margin-right: 10px;
 }
-a#disagree{
+.cancelRemoving{
   margin-left: 10px;
 }

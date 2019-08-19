@@ -1,0 +1,23 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+
+.menu{
+    grid-area: menu;
+    box-sizing: border-box;
+    padding: 15px 10px;
+    font-size: 20px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    opacity: 0.5;
+  }
+  .menu a{
+    text-decoration: none;
+    color: inherit;
+    padding-right: 5px;
+  }
+  .menu a:hover{
+    background-color: #e1e1e1;
+  }
+  .editMode{
+    display: none;
+  }

@@ -13,6 +13,10 @@ module.exports = {
 
     post_content: Sequelize.STRING(300),
 
+    user_name: Sequelize.STRING(50),
+
+    user_email: Sequelize.STRING(255),
+
     createdAt: Sequelize.DATE,
 
     updatedAt: Sequelize.DATE,

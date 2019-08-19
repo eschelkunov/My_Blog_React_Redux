@@ -1,0 +1,63 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+
+.formStyle {
+  max-width: 450px;
+  padding: 30px;
+  margin: 50px auto;
+  box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+  border-radius: 10px;
+  border: 1px solid #60606e;
+}
+.formStyle ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.formStyle ul li {
+  display: block;
+  margin-bottom: 10px;
+  min-height: 35px;
+}
+.formStyle ul li .fieldStyle {
+  box-sizing: border-box;
+  padding: 8px;
+  outline: none;
+  border: 1px solid #b0cfe0;
+  max-width: 450px;
+}
+.formStyle ul li .fieldStyle:focus {
+  box-shadow: 0 0 5px #b0cfe0;
+  border: 1px solid #b0cfe0;
+}
+.formStyle ul li .fieldSplit {
+  width: 49%;
+}
+.formStyle ul li .fieldFull {
+  width: 100%;
+}
+.formStyle ul li input.alignLeft {
+  float: left;
+}
+.formStyle ul li input.alignRight {
+  float: right;
+}
+.formStyle ul li textarea {
+  width: 100%;
+  height: 100px;
+  resize: none;
+}
+.submit {
+  background-color: #60606e;
+  border: 1px solid #17445e;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  padding: 8px 18px;
+  text-decoration: none;
+  font: 12px "Montserrat", sans-serif;
+}
+.submit:hover {
+  background: linear-gradient(to bottom, #34343d 5%, #34343d 100%);
+  background-color: #28739e;
+}

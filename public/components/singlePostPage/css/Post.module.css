@@ -1,0 +1,48 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+
+.post{
+    padding: 5px 10px;
+  }
+  .post h1{
+    font-size: 25px;
+    font-weight: 500;
+    padding: 15px 10px;
+    text-transform: uppercase;
+    opacity: 0.8;
+    text-align: left;
+  }
+  .post p{
+    font-family: "Open sans", sans-serif;
+    color: #999999;
+    line-height: 30px;
+    padding: 5px 10px;
+  }
+  .title, .content{
+    background: transparent;
+    border-top: none;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+  }
+  .title{
+    display: flex;
+    font-size: 20px;
+    font-weight: 500;
+    opacity: 0.8;
+    text-align: left;
+    padding: 10px 10px;
+    margin-bottom: 5px;
+    width: 100%;
+  
+  }
+  .content{
+    font-family: "Open sans", sans-serif;
+    color: #999999;
+    padding: 5px 10px;
+    line-height: 20px;
+    text-align: left;
+    width: 100%;
+    resize: none;
+    height: 150px;
+  }

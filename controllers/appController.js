@@ -16,13 +16,14 @@ exports.fetch_all_posts = async (req, res) => {
 };
 
 exports.create_a_post = async (req, res) => {
-  if (!req.body.title || !req.body.content || !req.body.user_id) {
-    res.status(400).send({ error: true, message: 'Please provide title/content' });
+  if (!req.body.username || !req.body.email || !req.body.title || !req.body.content) {
+    res.status(400).send({ error: true, message: 'Please provide the data for every field' });
   } else {
     const post = await Post.create({
+      user_name: req.body.username,
+      user_email: req.body.email,
       post_title: req.body.title,
       post_content: req.body.content,
-      user_id: req.body.user_id,
     }).catch(errorHandler);
     return res.json(post);
   }
@@ -50,7 +51,7 @@ exports.delete_a_post = async (req, res) => {
   const post = await Post.destroy({
     where: { id: req.params.id },
   }).catch(errorHandler);
-  return res.json({ message: 'Post successfully deleted' });
+  return res.json(post);
 };
 
 // Users

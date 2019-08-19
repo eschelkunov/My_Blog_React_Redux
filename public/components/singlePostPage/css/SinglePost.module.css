@@ -1,0 +1,20 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+
+.container {
+    display: grid;
+    grid-template-columns: 3fr;
+    grid-template-areas:
+      "menu"
+      "header"
+      "main"
+      "footer";
+    grid-gap: 20px;
+    width: 1020px;
+    margin: 0 auto;
+  }
+  .main{
+    grid-area: main;
+    font-size: 14px;
+    height:auto;
+  }

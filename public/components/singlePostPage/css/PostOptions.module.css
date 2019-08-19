@@ -1,0 +1,27 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+
+.optionsShown {
+  display: block;
+  padding: 15px;
+  text-align: right;
+}
+.button {
+  margin: 10px;
+  display: inline-block;
+  border: 1px solid #60606e;
+  background-color: #60606e;
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  padding: 2px;
+  font-size: 15px;
+  
+}
+.button:hover {
+  background: linear-gradient(to bottom, #34343d 5%, #34343d 100%);
+  background-color: #28739E;
+  color: white;
+  text-decoration: none;
+}
