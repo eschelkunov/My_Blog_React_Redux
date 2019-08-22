@@ -1,5 +1,3 @@
-
-
 const Sequelize = require('sequelize');
 const sequelize = require('../config/dbconnection');
 
@@ -28,6 +26,11 @@ module.exports = sequelize.define('User', {
     unique: true,
   },
 
+  role: {
+    type: Sequelize.STRING(35),
+    allowNull: false,
+  },
+
   likes: {
     type: Sequelize.INTEGER(11),
     defaultValue: 0,
@@ -41,5 +44,4 @@ module.exports = sequelize.define('User', {
   createdAt: Sequelize.DATE,
 
   updatedAt: Sequelize.DATE,
-
 });

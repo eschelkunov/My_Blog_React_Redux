@@ -26,6 +26,11 @@ module.exports = {
       unique: true,
     },
 
+    role: {
+      type: Sequelize.STRING(35),
+      allowNull: false,
+    },
+
     likes: {
       type: Sequelize.INTEGER(11),
       defaultValue: 0,

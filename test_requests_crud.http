@@ -34,3 +34,30 @@ Content-Type: application/json
 DELETE http://localhost:3000/api/posts/31
 Content-Type: application/json
 
+
+
+##################
+
+// CREATE USER 
+POST http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+    "username": "test",
+    "password": "password1",
+    "email": "test@email.com",
+    "role": "user",
+    "likes": 0,
+    "coments": 0
+}
+
+##################
+
+// Authenticate (Test)
+POST http://localhost:3000/api/auth
+Content-Type: application/json
+
+{
+    "username": "yshchelkunov",
+    "password": "password"
+}

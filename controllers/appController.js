@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const Post = require('../models/Post');
 const User = require('../models/User');
 
@@ -63,11 +64,40 @@ exports.fetch_all_users = async (req, res) => {
 
 exports.create_a_user = async (req, res) => {
   const user = await User.create({
-    username: req.params.username, // to be implemented
-    passwd: req.params.password, // to be implemented
-    user_email: req.params.mail, // to be implemented
-    likes: 0,
-    comments: 0,
+    username: req.body.username,
+    passwd: req.body.password,
+    user_email: req.body.email,
+    role: req.body.role,
+    likes: req.body.likes,
+    comments: req.body.comments,
   }).catch(errorHandler);
   return res.json(user);
+};
+
+// Authentication (find user)
+
+exports.authenticate = async (req, res) => {
+  await User.findOne({
+    where: { username: req.body.username, passwd: req.body.password },
+  }).then((resp) => {
+    if (resp) {
+      const result = resp.get({
+        plain: true,
+      });
+      if (req.body.username === result.username && req.body.password === result.passwd) {
+        const {
+          id, username, user_email, role,
+        } = result;
+        const userData = {
+          id,
+          username,
+          user_email,
+          role,
+        };
+        jwt.sign({ userData }, 'weLovePrivacy!', { expiresIn: '1h' }, (err, token) => res.json({ token, user: userData, isAuthenticated: true }));
+      }
+    } else {
+      return res.send({ status: 404, message: 'User not found' });
+    }
+  });
 };
