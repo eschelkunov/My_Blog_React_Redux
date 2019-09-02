@@ -6,6 +6,9 @@ const handleResponse = function (response) {
     if (response.ok) {
       return json;
     }
+    localStorage.removeItem('jwtToken');
+    localStorage.removeItem('user');
+    location.replace('/');
     return Promise.reject(response);
   });
 };

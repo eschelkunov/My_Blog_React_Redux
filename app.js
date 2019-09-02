@@ -44,7 +44,7 @@ function verifyToken(req, res, next) {
     req.token = bearerToken;
     jwt.verify(req.token, 'weLovePrivacy!', async (err, authData) => {
       if (err) {
-        res.redirect(403, '/');
+        res.status(403).send(err);
       } else {
         // Next middleware
         next();
@@ -52,7 +52,7 @@ function verifyToken(req, res, next) {
     });
   } else {
     // Forbidden
-    res.redirect(403, '/');
+    res.status(403).send(err);
   }
 }
 
