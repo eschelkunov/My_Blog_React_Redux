@@ -52,7 +52,7 @@ function verifyToken(req, res, next) {
     });
   } else {
     // Forbidden
-    res.status(403).send(err);
+    res.status(403);
   }
 }
 
