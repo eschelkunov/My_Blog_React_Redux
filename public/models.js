@@ -6,6 +6,9 @@ const handleResponse = function (response) {
     if (response.ok) {
       return json;
     }
+    if (~json.message.indexOf("You don't have enough permissions")){
+      return json;
+    }
     localStorage.removeItem('jwtToken');
     localStorage.removeItem('user');
     location.replace('/');

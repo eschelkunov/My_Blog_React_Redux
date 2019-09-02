@@ -1,4 +1,5 @@
 import { auth } from '../models';
+import { showPermissionError } from './postsActions';
 
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
@@ -39,6 +40,7 @@ export function submitLogout() {
   return (dispatch) => {
     localStorage.removeItem('jwtToken');
     localStorage.removeItem('user');
+    dispatch(showPermissionError(null));
     dispatch(doLogout());
     this.history.push('/');
   };

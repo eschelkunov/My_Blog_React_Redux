@@ -144,10 +144,15 @@ class Form extends Component {
         <div style={{ color: 'red' }}>{emailError}</div>
         <div style={{ color: 'red' }}>{titleError}</div>
         <div style={{ color: 'red' }}>{contentError}</div>
+        <div style={{ color: 'red' }}>{this.props.isPermissionError}</div>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  isPermissionError: state.Posts.isPermissionError,
+});
 
 const mapDispatchToProps = {
   submitPost,
@@ -155,7 +160,7 @@ const mapDispatchToProps = {
 
 export default withRouter(
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps,
   )(Form),
 );

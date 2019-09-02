@@ -49,7 +49,7 @@ class Post extends Component {
   };
 
   render() {
-    const { loading, post, editMode, confirmSaving, closeEditMode } = this.props;
+    const { loading, post, editMode, confirmSaving, closeEditMode, isPermissionError } = this.props;
     const { titleError, contentError } = this.state;
 
     if (loading || !post) {
@@ -76,6 +76,7 @@ class Post extends Component {
             onChange={e => this.handleChange(e)}
           />
           <div style={{ color: 'red' }}>{contentError}</div>
+          <div style={{ color: 'red' }}>{isPermissionError}</div>
         </div>
         <PostOptions
           onSave={() => {
@@ -104,6 +105,7 @@ const mapStateToProps = (state, ownProps) => {
     editMode: state.Menu.editMode,
     post: getPosts(state.Posts).find(post => post.id === parseInt(ownProps.params.id)),
     loading: getPostsLoading(state.Posts),
+    isPermissionError: state.Posts.isPermissionError,
   };
 };
 

@@ -9,6 +9,7 @@ export const FETCH_POSTS_FAILURE = 'FETCH_POSTS_FAILURE';
 export const ADD_POST = 'ADD_POST';
 export const UPDATE_POST = 'UPDATE_POST';
 export const REMOVE_POST = 'REMOVE_POST';
+export const SHOW_PERMISSION_ERROR = 'SHOW_PERMISSION_ERROR';
 
 // Simple plain actions
 export const fetchPostsBegin = () => ({
@@ -40,6 +41,11 @@ export const removePost = id => ({
   payload: { id },
 });
 
+export const showPermissionError = message => ({
+  type: SHOW_PERMISSION_ERROR,
+  payload: { message },
+});
+
 // Async actions
 
 export function fetchPosts() {
@@ -67,9 +73,11 @@ export function submitPost(data) {
       title,
       content,
     }).then((resp) => {
-      dispatch(addPostToStore(resp));
       if (resp.id) {
+        dispatch(addPostToStore(resp));
         this.history.push(`/posts/${resp.id}`);
+      } else {
+        dispatch(showPermissionError(resp.message));
       }
     });
   };
@@ -88,6 +96,8 @@ export function confirmSaving(data) {
         dispatch(updatePost(data));
         dispatch(fetchPosts());
         dispatch(closeEditMode());
+      } else {
+        dispatch(showPermissionError(resp.message));
       }
     });
   };
@@ -101,6 +111,8 @@ export function confirmDeleting(postId) {
         dispatch(closePopup());
         dispatch(fetchPosts());
         this.history.push('/posts');
+      } else {
+        dispatch(showPermissionError(resp.message));
       }
     });
   };

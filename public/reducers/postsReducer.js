@@ -5,12 +5,14 @@ import {
   ADD_POST,
   UPDATE_POST,
   REMOVE_POST,
+  SHOW_PERMISSION_ERROR,
 } from '../actions/postsActions';
 
 const initialState = {
   posts: [],
   loading: false,
   error: null,
+  isPermissionError: null,
 };
 
 export function postsReducer(state = initialState, action) {
@@ -52,6 +54,11 @@ export function postsReducer(state = initialState, action) {
       return {
         ...state,
         posts: state.posts.map(post => post.id !== action.payload.id),
+      };
+    case SHOW_PERMISSION_ERROR:
+      return {
+        ...state,
+        isPermissionError: action.payload.message,
       };
     default:
       return state;

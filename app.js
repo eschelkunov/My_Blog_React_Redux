@@ -46,6 +46,15 @@ function verifyToken(req, res, next) {
       if (err) {
         res.status(403).send(err);
       } else {
+        if (req.method !== 'GET') {
+          if (authData.userData.role !== 'admin') {
+            return res.status(403).send(
+              JSON.stringify({
+                message: "You don't have enough permissions for this action",
+              }),
+            );
+          }
+        }
         // Next middleware
         next();
       }

@@ -8,7 +8,7 @@ import { withRouter } from 'react-router';
 
 class Modal extends Component {
   render() {
-    const { removePopup, closePopup, match } = this.props;
+    const { removePopup, closePopup, match, isPermissionError } = this.props;
 
     return (
       <div className={removePopup ? styles.bgModalShow : styles.bgModalHide}>
@@ -32,6 +32,7 @@ class Modal extends Component {
               no
             </NavLink>
           </div>
+          <div style={{ color: 'red' }}>{isPermissionError}</div>
         </div>
       </div>
     );
@@ -41,6 +42,7 @@ class Modal extends Component {
 const mapStateToProps = state => {
   return {
     removePopup: state.Menu.removePopup,
+    isPermissionError: state.Posts.isPermissionError,
   };
 };
 
