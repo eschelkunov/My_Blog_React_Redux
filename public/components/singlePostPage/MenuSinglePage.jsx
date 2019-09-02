@@ -13,9 +13,8 @@ class Menu extends Component {
       [styles.editMode]: true,
     });
 
-    const { editMode, showEditMode, showRemovePopup } = this.props;
-
-    return (
+    const { editMode, showEditMode, showRemovePopup, currentUser } = this.props;
+    return currentUser.role === 'admin' ? (
       <div className={editMode ? menuClasses : styles.menu}>
         <NavLink to="/posts" id="btn-back-to-posts">
           <i className="fas fa-long-arrow-alt-left" /> Back to Posts
@@ -27,6 +26,12 @@ class Menu extends Component {
           <i className="fas fa-trash-alt" /> Remove Post
         </NavLink>
       </div>
+    ) : (
+      <div className={styles.menu}>
+        <NavLink to="/posts" id="btn-back-to-posts">
+          <i className="fas fa-long-arrow-alt-left" /> Back to Posts
+        </NavLink>
+      </div>
     );
   }
 }
@@ -34,6 +39,7 @@ class Menu extends Component {
 const mapStateToProps = state => {
   return {
     editMode: state.Menu.editMode,
+    currentUser: state.Auth.currentUser,
   };
 };
 

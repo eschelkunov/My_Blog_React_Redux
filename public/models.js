@@ -1,4 +1,5 @@
 const BASE_URL = '/api/posts/';
+const BASE_AUTH_URL = '/auth';
 
 const handleResponse = function (response) {
   return response.json().then((json) => {
@@ -11,7 +12,10 @@ const handleResponse = function (response) {
 
 const doRequest = (url, params, method, body) => fetch(`${url}${params}`, {
   method,
-  headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+  headers: {
+    'Content-Type': 'application/json; charset=UTF-8',
+    Authorization: `Bearer ${localStorage.getItem('jwtToken')}`,
+  },
   body,
 }).then(handleResponse);
 
@@ -29,3 +33,6 @@ export const editPost = data => doRequest(BASE_URL, `${data.id}`, 'PUT', JSON.st
 
 // Delete post
 export const deletePost = id => doRequest(BASE_URL, `${id}`, 'DELETE');
+
+// Authentication
+export const auth = data => doRequest(BASE_AUTH_URL, '', 'POST', JSON.stringify(data));

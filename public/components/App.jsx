@@ -2,8 +2,7 @@ import Home from './homePage/Home.jsx';
 import SinglePost from './singlePostPage/SinglePost.jsx';
 import AddPost from './addPostPage/AddPost.jsx';
 import React, { Component } from 'react';
-import ErrorBoundary from './ErrorBoundary.jsx';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import LoadingSpinner from './LoadingSpinner.jsx';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -11,6 +10,7 @@ import { getPostsError, getPosts, getPostsLoading } from '../reducers/postsReduc
 import { fetchPosts } from '../actions/postsActions';
 import mountains from '../images/mountains.jpg';
 import hero from '../images/site-hero.jpg';
+import PrivateRoute from './privateRoute';
 
 export class App extends Component {
   componentWillMount() {
@@ -18,22 +18,19 @@ export class App extends Component {
     fetchPosts();
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     document.getElementById('body').style.backgroundImage =
-      this.props.theme === 'light' ? `url(${hero})` : `url(${mountains})`;
+      this.props.theme === 'light' ? `url(/${hero})` : `url(/${mountains})`;
   }
 
   render() {
     const { loading } = this.props;
-
     if (loading) return <LoadingSpinner />;
     return (
       <BrowserRouter>
-        <ErrorBoundary>
-          <Route path={['/posts', '/']} exact component={Home} />
-          <Route path="/posts/:id" exact component={SinglePost} />
-          <Route path="/new" exact component={AddPost} />
-        </ErrorBoundary>
+        <PrivateRoute path="/posts" exact component={Home} />
+        <PrivateRoute path="/posts/:id" exact component={SinglePost} />
+        <PrivateRoute path="/new" exact component={AddPost} />
       </BrowserRouter>
     );
   }
@@ -44,6 +41,8 @@ const mapStateToProps = state => ({
   posts: getPosts(state.Posts),
   loading: getPostsLoading(state.Posts),
   theme: state.Theme.theme,
+  currentUser: state.Auth.currentUser,
+  isAuthenticated: state.Auth.isAuthenticated,
 });
 
 const mapDispatchToProps = dispatch =>

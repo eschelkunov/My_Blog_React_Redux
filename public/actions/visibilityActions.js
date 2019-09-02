@@ -22,7 +22,7 @@ export const showRemovePopup = () => ({
   removePopup: true,
 });
 
-export const switchTheme= (value) => ({
+export const switchTheme = value => ({
   type: SWITCH_THEME,
   themeMode: value,
 });
