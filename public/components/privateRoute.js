@@ -4,7 +4,6 @@ import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
-  debugger;
   return (
     <Route
       {...rest}
